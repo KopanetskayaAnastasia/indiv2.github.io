@@ -17,17 +17,32 @@ public class Polinom {
     int result(int x){
         int r=0;
         for(int i=1;i<a.length;i++){
-                r+=Math.pow(x,i)*a[i];
+            r+=Math.pow(x,i)*a[i];
         }
         return r+a[0];
     }
     Polinom sum(Polinom p){
+        int [] b=p.getA();
         int maxn=Math.max(n,p.getN());
         int []ap=new int[maxn+1];
         for(int i=0;i<maxn+1;i++){
             ap[i] =0;
         }
-        if(a.length>p.getA().length){
+        for(int i=0;i<a.length;i++)
+            ap[i]+=a[i];
+        for(int i=0;i<b.length;i++)
+            ap[i]+=b[i];
+
+       /* for(int i=0;i<maxn+1;i++){
+            if (a.length<=i)
+                ap[i]=p.getA()[i];
+            if(p.getA().length<=i)
+                ap[i]=a[i];
+            if(a.length>i && p.getA().length>i)
+                ap[i]=a[i]+p.getA()[i];
+        }*/
+
+       /* if(a.length>p.getA().length){
             ap=a;
             for(int i=0;i<p.getA().length;i++)
                 ap[i]+=p.getA()[i];
@@ -36,7 +51,7 @@ public class Polinom {
             ap=p.getA();
             for(int i=0;i<a.length;i++)
                 ap[i]+=a[i];
-        }
+        }*/
         return new Polinom(maxn,ap);
     }
     Polinom dif(Polinom p){
@@ -63,7 +78,7 @@ public class Polinom {
         }
         for(int i=0;i<n+1;i++)
             for(int j=0;j<p.getN()+1;j++)
-                    ap[i+j]+=a[i]*p.getA()[j];
+                ap[i+j]+=a[i]*p.getA()[j];
         return new Polinom(n1,ap);
     }
     void print(){
